@@ -20,7 +20,7 @@ h1 {
 	font-weight: 100;
 }
 
-container {
+section {
 	
 color:white;
 	margin-left: auto;
@@ -28,7 +28,7 @@ color:white;
 	display: block;
 }
 
-controls {
+div.controls {
 	font-weight: 300;
   display: block;
 	text-align: center;
@@ -46,6 +46,7 @@ controls {
 	border-radius: 5px;
 	display: inline-block;
   cursor: pointer;
+  color: white;
 }
 
 card {

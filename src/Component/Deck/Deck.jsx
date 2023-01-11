@@ -5,38 +5,42 @@ import jQuery from "jquery";
 
 function Deck() {
 
-    // var btnRefresh = document.getElementsByClassName("btn-refresh");
-
-
     var deckSize = 52;
-    useEffect(()=>{
-        // var deckSize = 52;
-        let d = 52;
-        for( d=deckSize; d > 0; d--) { $('container select').append('<option value='+d+'>'+d+'</option>'); }
-        deckOfCards(52);
-    },[])
-
-    // var deckSize = 52;
-    // var d = 52;
-    // for( d=deckSize; d > 0; d--) { $('container select').append('<option value='+d+'>'+d+'</option>'); }
-
-    // var [numberOfCards,setNumberofCards] = useState(52);
     var numberOfCards = 52;
 
+    var randomValue, randomSuit, cardSingle, cardSuit, cardValue;
+
+    var n = 0;
+    var i = 0;
+    var c = 0;
+    var m = 0;
+
+    var cardList = [];
+    var listValue = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' ];
+    var listSuit = ['♠', '♦', '♥', '♣'];
+
+
     function deckOfCards(numberOfCards) { 
+
+        $( 'card' ).remove(); 
+
+        for( i=0; i < deckSize; i++) { cardGenerate();}
         
-        var randomValue, randomSuit, cardSingle, cardSuit, cardValue;
+        function cardCode() { 
+            $('section').append('<card><corner><value></value><suit></suit></corner><center></center><corner><value></value><suit></suit></corner></card>');
+        }
 
-        var n = 0;
-        var i = 0;
-        var c = 0;
-        var m = 0;
+        for( n=0; n < numberOfCards; n++) { cardCode(); }
 
-        var cardList = [];
-        var listValue = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' ];
-        var listSuit = ['♠', '♦', '♥', '♣'];
+        decorateCard();
 
-        $( 'card' ).remove(); /////////////////////////////////////////
+        n=0;
+        i=0;
+        c=0;
+        m=0;
+        cardList=[];
+
+    }//deckOfCards
 
     function cardGenerate() {  
         randomValue = listValue[Math.floor(Math.random() * listValue.length)];
@@ -55,81 +59,63 @@ function Deck() {
         }
     }
 
-    for( i=0; i < deckSize; i++) { cardGenerate(); }
 
-
-
-    function cardCode() { 
-        $('container').append('<card><corner><value></value><suit></suit></corner><center></center><corner><value></value><suit></suit></corner></card>');
-    }
-
-    for( n=0; n < numberOfCards; n++) { cardCode(); }
-
-
-
-
+    function decorateCard(){
         $( 'card' ).each(function() {
 
-        cardSuit = cardList[c].substring(0).replace(/\d+/g, '').replace('A', '').replace('K', '').replace('Q', '').replace('J', '');
-        cardValue = cardList[c].substring(1);
-
-        $(this).addClass('no-' + cardValue);
-        $(this).find('suit').html(cardSuit);
-
-        $(this).find('value').html(cardValue);
-
-        if (cardValue ==='A') { $(this).find('center').html( '<symbol>'+cardSuit+'&#xFE0E;</symbol>' ); }
-        else if (cardValue === 'K'  && (cardSuit ==='♥' || cardSuit === '♦')){ $(this).find('center').html('&#x2654;&#xFE0E;'); }
-        else if (cardValue === 'K'  && (cardSuit ==='♠' || cardSuit === '♣')){ $(this).find('center').html('&#x265a;&#xFE0E;'); }
-        else if (cardValue === 'Q'  && (cardSuit ==='♥' || cardSuit === '♦')){ $(this).find('center').html('&#x2655;&#xFE0E;'); }
-        else if (cardValue === 'Q'  && (cardSuit ==='♠' || cardSuit === '♣')){ $(this).find('center').html('&#x265b;&#xFE0E;'); }
-        else if (cardValue === 'J'  && (cardSuit ==='♥' || cardSuit === '♦')){ $(this).find('center').html('&#x2657;&#xFE0E;'); }
-        else if (cardValue === 'J'  && (cardSuit ==='♠' || cardSuit === '♣')){ $(this).find('center').html('&#x265d;&#xFE0E;'); }
-        else { 
-        for( m=0; m < cardValue; m++) { $(this).find('center').append( '<symbol>'+cardSuit+'&#xFE0E;</symbol>' ); }
-        }
-        if (cardSuit ==='♥') {cardSuit = 'heart';}
-        else if (cardSuit === '♦'){ cardSuit = 'diamond'; }
-        else if (cardSuit === '♠'){ cardSuit = 'spade'; }
-        else if (cardSuit === '♣'){ cardSuit = 'club'; }
-        $(this).addClass(cardSuit);
-        c++;
-        });
-
-    }//deckOfCards
-
-
-    // $(btnRefresh).on('click', function(e) {
-    // // e.preventDefault();
-    // numberOfCards = ($('.cardAmount').val());
-    // deckOfCards();
-    // });
-
-    // $(document).ready(function() {
-    // deckOfCards();
-    // });
-
-
-
-function handleClick(e){
-    numberOfCards = e.target.value;
-    deckOfCards(numberOfCards);
+            cardSuit = cardList[c].substring(0).replace(/\d+/g, '').replace('A', '').replace('K', '').replace('Q', '').replace('J', '');
+            cardValue = cardList[c].substring(1);
     
-}
-function handleRefresh(e){
-    e.preventDefault();
-    deckOfCards(numberOfCards);
-}
+            $(this).addClass('no-' + cardValue);
+            $(this).find('suit').html(cardSuit);
+    
+            $(this).find('value').html(cardValue);
+    
+            if (cardValue ==='A') { $(this).find('center').html( '<symbol>'+cardSuit+'&#xFE0E;</symbol>' ); }
+            else if (cardValue === 'K'  && (cardSuit ==='♥' || cardSuit === '♦')){ $(this).find('center').html('&#x2654;&#xFE0E;'); }
+            else if (cardValue === 'K'  && (cardSuit ==='♠' || cardSuit === '♣')){ $(this).find('center').html('&#x265a;&#xFE0E;'); }
+            else if (cardValue === 'Q'  && (cardSuit ==='♥' || cardSuit === '♦')){ $(this).find('center').html('&#x2655;&#xFE0E;'); }
+            else if (cardValue === 'Q'  && (cardSuit ==='♠' || cardSuit === '♣')){ $(this).find('center').html('&#x265b;&#xFE0E;'); }
+            else if (cardValue === 'J'  && (cardSuit ==='♥' || cardSuit === '♦')){ $(this).find('center').html('&#x2657;&#xFE0E;'); }
+            else if (cardValue === 'J'  && (cardSuit ==='♠' || cardSuit === '♣')){ $(this).find('center').html('&#x265d;&#xFE0E;'); }
+            else { 
+            for( m=0; m < cardValue; m++) { $(this).find('center').append( '<symbol>'+cardSuit+'&#xFE0E;</symbol>' ); }
+            }
+            if (cardSuit ==='♥') {cardSuit = 'heart';}
+            else if (cardSuit === '♦'){ cardSuit = 'diamond'; }
+            else if (cardSuit === '♠'){ cardSuit = 'spade'; }
+            else if (cardSuit === '♣'){ cardSuit = 'club'; }
+            $(this).addClass(cardSuit);
+            c++;
+            });
+    }
+
+    
+    function handleClick(e){
+        numberOfCards = e.target.value;
+        deckOfCards(numberOfCards);
+        
+    }
+    function handleRefresh(e){
+        e.preventDefault();
+        deckOfCards(numberOfCards);
+    }
+
+    useEffect(()=>{
+        let d;
+        for( d=deckSize; d > 0; d--) { $('section select').append('<option value='+d+'>'+d+'</option>'); }
+        deckOfCards(deckSize);
+    },[])
 
   return (
     <>
-    <container>
+    <section>
         <h1>Deck of CSS Cards shuffled with jquery</h1>
-        <controls>
+        <div className='controls'>
     
         Amount Of Cards <select name="cardAmount" className="cardAmount" onChange={handleClick} ></select> <span className="btn-refresh" onClick={handleRefresh}>Shuffle Deck &rsaquo;</span>
-    </controls>
-    </container>
+    </div>
+    </section>
     </>
   )
 }

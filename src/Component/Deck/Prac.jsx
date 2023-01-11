@@ -1,13 +1,14 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import "./deck.css";
 import $ from "jquery";
 import jQuery from "jquery";
 
 function Deck() {
 
-    var btnRefresh = document.getElementsByClassName("btn-refresh");
-
+    // var btnRefresh = document.getElementsByClassName("btn-refresh");
+    // var deckSize = useState(52);
     var deckSize = 52;
+
     var d = 52;
     for( d=deckSize; d > 0; d--) { $('container select').append('<option value='+d+'>'+d+'</option>'); }
 
@@ -28,7 +29,7 @@ function Deck() {
 
         $( 'card' ).remove(); /////////////////////////////////////////
 
-    function cardGenerate() {  
+        function cardGenerate() {  
         randomValue = listValue[Math.floor(Math.random() * listValue.length)];
         randomSuit = listSuit[Math.floor(Math.random() * listSuit.length)];
         cardSingle = randomSuit + randomValue; 
@@ -56,9 +57,7 @@ function Deck() {
     for( n=0; n < numberOfCards; n++) { cardCode(); }
 
 
-
-
-        $( 'card' ).each(function() {
+    $( 'card' ).each(function() {
 
         cardSuit = cardList[c].substring(0).replace(/\d+/g, '').replace('A', '').replace('K', '').replace('Q', '').replace('J', '');
         cardValue = cardList[c].substring(1);
@@ -84,7 +83,7 @@ function Deck() {
         else if (cardSuit === '♣'){ cardSuit = 'club'; }
         $(this).addClass(cardSuit);
         c++;
-        });
+    });
 
     }//deckOfCards
 
@@ -109,7 +108,9 @@ function Deck() {
         <h1>Deck of CSS Cards shuffled with jquery</h1>
         <controls>
     
-        Amount Of Cards <select name="cardAmount" className="cardAmount"></select> <span className="btn-refresh">Shuffle Deck &rsaquo;</span>
+        Amount Of Cards <select name="cardAmount" className="cardAmount" 
+        
+        ></select> <span className="btn-refresh">Shuffle Deck &rsaquo;</span>
     </controls>
     </container>
     </>
