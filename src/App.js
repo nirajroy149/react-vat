@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+// import Blog from "./Component/Blog/Blog";
+// import Plan from "./Component/Plan/Plan";
+// import Shop from "./Component/Shop/Shop"
+import Deck from "./Component/Deck/Deck";
+// import Prac from "./Component/Deck/Prac"
+
 
 function App() {
+  // const mainImg="https://cdn2.hubspot.net/hubfs/322787/Mychefcom/images/BLOG/Header-Blog/photo-culinaire-pexels.jpg"
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <Blog
+    //   headline="Why you Need More Calcium in Your Daily Diet"
+    //   author="Niraj Kr Roy"
+    //   authorImage="https://randomuser.me/api/portraits/men/95.jpg"
+    //   thumbImg={mainImg}
+    // />
+    // <Plan/>
+    // <Shop/>
+    // <Prac/>
+     <Deck/> 
   );
 }
 
